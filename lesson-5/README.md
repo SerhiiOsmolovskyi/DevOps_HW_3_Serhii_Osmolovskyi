@@ -122,9 +122,9 @@ terraform {
 
 ## Команди Terraform
 
-terraform init
-terraform plan
-terraform apply
-terraform destroy
+- terraform init
+- terraform plan
+- terraform apply
+- terraform destroy
 
 ⚠️ Після використання AWS обов’язково видаляйте ресурси, щоб уникнути непередбачених витрат.
