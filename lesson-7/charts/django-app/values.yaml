@@ -1,0 +1,19 @@
+﻿image:
+  repository: "780522924250.dkr.ecr.ca-central-1.amazonaws.com/lesson7-django-app"
+  tag: "latest"
+  pullPolicy: IfNotPresent
+  
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 8000
+
+env:
+  DJANGO_DEBUG: "False"
+  DJANGO_SECRET_KEY: "change-me"
+  DJANGO_ALLOWED_HOSTS: "*"
+
+autoscaling:
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70

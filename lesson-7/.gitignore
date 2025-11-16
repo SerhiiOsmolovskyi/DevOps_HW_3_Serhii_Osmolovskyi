@@ -1,0 +1,110 @@
+# -----------------------------
+# Terraform
+# -----------------------------
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+terraform.tfstate*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# ignore downloaded Terraform modules
+.terraform/modules/
+
+# -----------------------------
+# Kubernetes / Helm
+# -----------------------------
+charts/**/charts/
+charts/**/tmp/
+charts/**/values.schema.json
+charts/**/values.yaml.save
+*.release.yaml
+
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+*.whl
+pip-wheel-metadata/
+*.log
+.env
+.venv
+venv/
+env/
+ENV/
+
+# -----------------------------
+# Django
+# -----------------------------
+db.sqlite3
+staticfiles/
+media/
+*.mo
+*.pot
+
+# -----------------------------
+# Docker
+# -----------------------------
+*.log
+docker-compose.override.yml
+
+# -----------------------------
+# OS / Editor junk
+# -----------------------------
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+.Trash-*
+
+# Editors
+*.swp
+*.swo
+*~
+
+# -----------------------------
+# Node / React Native (if appears)
+# -----------------------------
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# -----------------------------
+# IDE
+# -----------------------------
+.vscode/
+.idea/
+*.iml
+
+# -----------------------------
+# AWS / credentials
+# -----------------------------
+*.pem
+*.key
+*.crt
+
+# -----------------------------
+# Other large or unnecessary files
+# -----------------------------
+*.zip
+*.tar
+*.gz
+*.exe      # prevents 700MB terraform provider exe from being added again
+
