@@ -1,0 +1,21 @@
+controller:
+  admin:
+    username: "admin"
+    password: "admin123"
+    createSecret: true
+
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "512Mi"
+    limits:
+      cpu: "500m"
+      memory: "1Gi"
+
+  serviceType: ClusterIP
+
+persistence:
+  enabled: false
+
+agent:
+  enabled: true

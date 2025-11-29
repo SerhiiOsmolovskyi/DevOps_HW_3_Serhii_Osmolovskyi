@@ -1,0 +1,14 @@
+{{- range $name, $repo := .Values.repositories }}
+apiVersion: argoproj.io/v1alpha1
+kind: Repository
+metadata:
+  name: {{ $name }}
+  namespace: argocd
+spec:
+  url: {{ $repo.url | quote }}
+{{- if $repo.type }}
+  type: {{ $repo.type | quote }}
+{{- end }}
+---
+{{- end }}
+

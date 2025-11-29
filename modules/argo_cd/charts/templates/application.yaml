@@ -1,0 +1,26 @@
+{{- range $name, $app := .Values.applications }}
+{{- if $app.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $name }}
+  namespace: {{ default "argocd" $app.namespace }}
+spec:
+  project: {{ $app.project | quote }}
+  source:
+    repoURL: {{ $app.source.repoURL | quote }}
+    targetRevision: {{ $app.source.targetRevision | quote }}
+    path: {{ $app.source.path | quote }}
+    # якщо замість path будеш юзати helm chart (chart: django-app) –
+    # сюди можна додати поле chart та інші опції.
+  destination:
+    server: {{ $app.destination.server | quote }}
+    namespace: {{ $app.destination.namespace | quote }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+{{- end }}
+---
+{{- end }}
+

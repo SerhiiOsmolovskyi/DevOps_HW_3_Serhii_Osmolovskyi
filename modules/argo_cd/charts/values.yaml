@@ -1,0 +1,16 @@
+repositories:
+  django:
+    url: "https://github.com/SerhiiOsmolovskyi/DevOps_HW_3_Serhii_Osmolovskyi.git"
+
+applications:
+  django-app:
+    enabled: true
+    project: "default"
+    source:
+      repoURL: "https://github.com/SerhiiOsmolovskyi/DevOps_HW_3_Serhii_Osmolovskyi.git"
+      targetRevision: "lesson-8-9"
+      path: "lesson-8-9/charts/django-app"
+    destination:
+      server: "https://kubernetes.default.svc"
+      namespace: "django"
+

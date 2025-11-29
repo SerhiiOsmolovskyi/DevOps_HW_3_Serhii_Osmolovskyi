@@ -1,0 +1,28 @@
+image:
+  repository: "CHANGE_ME_ECR_URL/django-app"
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+replicaCount: 1
+
+service:
+  type: ClusterIP
+  port: 8000
+
+env:
+  DJANGO_SETTINGS_MODULE: "project.settings"
+  DEBUG: "false"
+
+resources: {}
+  # limits:
+  #   cpu: "500m"
+  #   memory: "512Mi"
+  # requests:
+  #   cpu: "100m"
+  #   memory: "128Mi"
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 75
