@@ -1,0 +1,55 @@
+########################
+# Terraform
+########################
+*.tfstate
+*.tfstate.*
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+.terraform.lock.hcl
+crash.log
+
+########################
+# Kubernetes / Kubeconfig
+########################
+*.kube
+config
+.kube/
+kubeconfig
+kubeconfig.yaml
+
+########################
+# Helm
+########################
+*.tgz
+
+########################
+# Python / Django
+########################
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+
+########################
+# Docker
+########################
+*.tar
+docker-images/
+
+########################
+# IDE / Editor files
+########################
+.vscode/
+.idea/
+*.swp
+*.swo
+
+########################
+# OS files
+########################
+.DS_Store
+Thumbs.db
