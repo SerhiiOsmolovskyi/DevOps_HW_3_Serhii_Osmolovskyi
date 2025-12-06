@@ -3,19 +3,18 @@
 # ============================
 *.tfstate
 *.tfstate.*
-crash.log
-crash.*.log
-override.tf
-override.tf.json
-*_override.tf
-*_override.tf.json
+terraform.tfstate.backup
 .terraform/
 .terraform.lock.hcl
 terraform.tfvars
 terraform.tfvars.json
-
-# Якщо буде використовуватись remote backend ^
-# terraform.tfstate.backup
+.crash.log
+.crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+*.plan
 
 # ============================
 # LOGS
@@ -26,15 +25,19 @@ log/
 
 # ============================
 # PYTHON / DJANGO
-# (якщо твоє Django app теж в репозиторії)
 # ============================
 *.pyc
 __pycache__/
 env/
 venv/
 .venv/
+app/app/venv/
 *.sqlite3
 *.db
+
+# Django secrets
+.env
+*.env
 
 # ============================
 # HELM / K8s
@@ -45,6 +48,11 @@ charts/*/values.prod.yaml
 *.kubeconfig
 kubeconfig
 .kube/
+
+# ============================
+# AWS
+# ============================
+.aws/
 
 # ============================
 # DOCKER
