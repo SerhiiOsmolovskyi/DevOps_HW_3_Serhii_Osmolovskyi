@@ -1,76 +1,53 @@
-# ============================
-# TERRAFORM
-# ============================
+# Terraform directories
+.terraform/
+.terraform.tfstate*
+.terraform.lock.hcl.backup
+
+# Terraform state files
+terraform.tfstate
+terraform.tfstate.backup
 *.tfstate
 *.tfstate.*
-terraform.tfstate.backup
-.terraform/
-.terraform.lock.hcl
-terraform.tfvars
-terraform.tfvars.json
-.crash.log
-.crash.*.log
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Sensitive variable files
+*.tfvars
+*.tfvars.json
+
+# Override files (локальні)
 override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
-*.plan
 
-# ============================
-# LOGS
-# ============================
-*.log
-logs/
-log/
-
-# ============================
-# PYTHON / DJANGO
-# ============================
-*.pyc
-__pycache__/
-env/
-venv/
-.venv/
-app/app/venv/
-*.sqlite3
-*.db
-
-# Django secrets
+# Local environment / credentials
+*.auto.tfvars
 .env
-*.env
+.env.*
 
-# ============================
-# HELM / K8s
-# ============================
-charts/*/values.local.yaml
-charts/*/values.dev.yaml
-charts/*/values.prod.yaml
-*.kubeconfig
-kubeconfig
-.kube/
-
-# ============================
-# AWS
-# ============================
-.aws/
-
-# ============================
-# DOCKER
-# ============================
-*.tar
-*.img
-.cache/
-
-# ============================
-# JENKINS
-# ============================
-secrets/
-.jenkins/
-
-# ============================
-# OS / EDITOR
-# ============================
+# OS files
 .DS_Store
 Thumbs.db
-.idea/
+
+# Editors / IDE
 .vscode/
+.idea/
+*.iml
+
+# Python / scripts (якщо будуть)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# Logs
+*.log
+
+# Misc
+*.tmp
+*.swp

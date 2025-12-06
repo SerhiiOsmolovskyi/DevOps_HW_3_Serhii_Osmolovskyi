@@ -49,7 +49,7 @@ variable "ecr_name" {
 variable "cluster_name" {
   type        = string
   description = "EKS cluster name"
-  default     = "dev-eks"
+  default     = "dev-eks-final"
 }
 
 variable "cluster_version" {
@@ -240,4 +240,33 @@ variable "rds_tags" {
     Project = "DevOps_HW_3"
     Env     = "dev"
   }
+}
+
+#######################################
+# MONITORING (Prometheus + Grafana)
+#######################################
+
+variable "monitoring_namespace" {
+  type        = string
+  description = "Namespace для Prometheus + Grafana"
+  default     = "monitoring"
+}
+
+variable "monitoring_chart_version" {
+  type        = string
+  description = "Версія Helm-чарту kube-prometheus-stack"
+  default     = "65.5.1"
+}
+
+variable "grafana_admin_user" {
+  type        = string
+  description = "Логін адміністратора Grafana"
+  default     = "admin"
+}
+
+variable "grafana_admin_password" {
+  type        = string
+  description = "Пароль адміністратора Grafana"
+  default     = "admin123"
+  sensitive   = true
 }

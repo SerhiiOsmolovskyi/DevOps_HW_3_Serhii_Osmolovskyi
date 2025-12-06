@@ -54,19 +54,19 @@ provider "helm" {
 
 # S3 + DynamoDB для backend-а
 # (у тебе вже створені вручну і використані через backend.tf)
-/*
-module "s3_backend" {
-  source      = "./modules/s3-backend"
-  bucket_name = var.backend_bucket_name
-  table_name  = var.backend_dynamodb_table_name
-}
-*/
+# Якщо захочеш — можна підключити:
+#
+# module "s3_backend" {
+#   source      = "./modules/s3-backend"
+#   bucket_name = var.backend_bucket_name
+#   table_name  = var.backend_dynamodb_table_name
+# }
 
 # VPC
 module "vpc" {
-  source              = "./modules/vpc"
-  vpc_cidr_block      = var.vpc_cidr_block
-  public_subnet_cidrs = var.public_subnet_cidrs
+  source               = "./modules/vpc"
+  vpc_cidr_block       = var.vpc_cidr_block
+  public_subnet_cidrs  = var.public_subnet_cidrs
   private_subnet_cidrs = var.private_subnet_cidrs
 }
 
@@ -95,7 +95,7 @@ module "jenkins" {
   admin_user     = var.jenkins_admin_user
   admin_password = var.jenkins_admin_password
 
-  # Передаємо параметри кластера — якщо модуль їх використовує
+  # Параметри кластера (якщо модуль їх використовує)
   kube_host  = module.eks.cluster_endpoint
   kube_ca    = module.eks.cluster_ca
   kube_token = data.aws_eks_cluster_auth.this.token
@@ -123,13 +123,13 @@ module "rds" {
   use_aurora = var.rds_use_aurora
 
   # engine / версія
-  engine         = var.rds_engine # "postgres" | "mysql" | "aurora-postgresql" | "aurora-mysql"
+  engine         = var.rds_engine          # "postgres" | "mysql" | "aurora-postgresql" | "aurora-mysql"
   engine_version = var.rds_engine_version
 
   # типи інстансів
-  instance_class        = var.rds_instance_class        # для звичайної RDS
-  aurora_instance_class = var.rds_aurora_instance_class # для Aurora
-  aurora_instances      = var.rds_aurora_instances      # скільки Aurora instances
+  instance_class        = var.rds_instance_class         # для звичайної RDS
+  aurora_instance_class = var.rds_aurora_instance_class  # для Aurora
+  aurora_instances      = var.rds_aurora_instances       # кількість Aurora instances
 
   # ємність / Multi-AZ для звичайної RDS
   allocated_storage = var.rds_allocated_storage
@@ -137,7 +137,7 @@ module "rds" {
 
   # мережа
   vpc_id     = module.vpc.vpc_id
-  subnet_ids = module.vpc.private_subnet_ids # приватні сабнети з VPC-модуля
+  subnet_ids = module.vpc.private_subnet_ids  # приватні сабнети з VPC-модуля
 
   allowed_cidr_blocks = var.rds_allowed_cidr_blocks
 
@@ -147,7 +147,7 @@ module "rds" {
   database_name = var.rds_database_name
   port          = var.rds_port
 
-  # параметр група
+  # parameter group
   parameter_group_family = var.rds_parameter_group_family
   max_connections        = var.rds_max_connections
   log_statement          = var.rds_log_statement
@@ -155,4 +155,18 @@ module "rds" {
 
   # теги — опційно
   tags = var.rds_tags
+}
+
+# Monitoring: Prometheus + Grafana через Helm
+module "monitoring" {
+  source = "./modules/monitoring"
+
+  namespace              = var.monitoring_namespace
+  chart_version          = var.monitoring_chart_version
+  grafana_admin_user     = var.grafana_admin_user
+  grafana_admin_password = var.grafana_admin_password
+
+  kube_host  = module.eks.cluster_endpoint
+  kube_ca    = module.eks.cluster_ca
+  kube_token = data.aws_eks_cluster_auth.this.token
 }

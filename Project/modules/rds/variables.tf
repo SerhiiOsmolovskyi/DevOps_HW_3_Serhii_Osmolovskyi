@@ -13,6 +13,14 @@ variable "engine" {
   type        = string
   description = "Тип engine: 'postgres', 'mysql', 'aurora-postgresql' або 'aurora-mysql'"
   default     = "postgres"
+
+  validation {
+    condition = contains(
+      ["postgres", "mysql", "aurora-postgresql", "aurora-mysql"],
+      var.engine
+    )
+    error_message = "engine має бути одним із: postgres, mysql, aurora-postgresql, aurora-mysql."
+  }
 }
 
 variable "engine_version" {
@@ -30,7 +38,7 @@ variable "instance_class" {
 variable "aurora_instance_class" {
   type        = string
   description = "Тип інстансу для Aurora instances"
-  default     = "db.r6g.large"
+  default     = "db.t3.small"
 }
 
 variable "aurora_instances" {
@@ -88,12 +96,17 @@ variable "port" {
   type        = number
   description = "Порт для бази даних"
   default     = 5432
+
+  validation {
+    condition     = var.port > 0 && var.port < 65535
+    error_message = "port має бути у діапазоні 1–65534."
+  }
 }
 
 variable "parameter_group_family" {
   type        = string
   description = "Назва family для parameter group (наприклад 'postgres16', 'aurora-postgresql15')"
-  default     = "postgres16"
+  default     = "aurora-postgresql15"
 }
 
 variable "max_connections" {
@@ -106,11 +119,16 @@ variable "log_statement" {
   type        = string
   description = "Параметр log_statement (none, ddl, mod, all)"
   default     = "none"
+
+  validation {
+    condition = contains(["none", "ddl", "mod", "all"], var.log_statement)
+    error_message = "log_statement має бути одним із: none, ddl, mod, all."
+  }
 }
 
 variable "work_mem" {
   type        = string
-  description = "Параметр work_mem"
+  description = "Параметр work_mem (наприклад '4MB', '16MB')"
   default     = "4MB"
 }
 
